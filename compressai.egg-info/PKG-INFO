@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: compressai
+Version: 1.2.0
+Summary: A PyTorch library and evaluation platform for end-to-end compression research
+Home-page: https://github.com/InterDigitalInc/CompressAI
+Author: InterDigital AI Lab
+Author-email: compressai@interdigital.com
+License: BSD 3-Clause Clear License
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.6
+Provides-Extra: test
+Provides-Extra: dev
+Provides-Extra: doc
+Provides-Extra: tutorials
+Provides-Extra: all
+License-File: LICENSE
