@@ -349,14 +349,14 @@ def main(argv):
     clscriterion = Clsloss(device, True)
 
     last_epoch = 0
-    if args.checkpoint:  # load from previous checkpoint
+    if args.checkpoint: 
         logging.info("Loading "+str(args.checkpoint))
         checkpoint = torch.load(args.checkpoint, map_location=device)
         if list(checkpoint["state_dict"].keys())[0][:7]=='module.':
             from collections import OrderedDict
             new_state_dict = OrderedDict()
             for k, v in checkpoint["state_dict"].items():
-                name = k[7:] # remove `module.`
+                name = k[7:] 
                 new_state_dict[name] = v
         else:
             new_state_dict = checkpoint['state_dict']

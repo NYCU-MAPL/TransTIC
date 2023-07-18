@@ -520,13 +520,14 @@ class TIC_PromptModel_first2(nn.Module):
         return net
 
     def compress(self, x):
-        y = self.g_a(x)
-        z = self.h_a(y)
+        x_size = (x.shape[2], x.shape[3])
+        y, attns_a = self.g_a(x, x_size)
+        z = self.h_a(y, x_size)
 
         z_strings = self.entropy_bottleneck.compress(z)
         z_hat = self.entropy_bottleneck.decompress(z_strings, z.size()[-2:])
 
-        gaussian_params = self.h_s(z_hat)
+        gaussian_params = self.h_s(z_hat, x_size)
         scales_hat, means_hat = gaussian_params.chunk(2, 1)
         indexes = self.gaussian_conditional.build_indexes(scales_hat)
         y_strings = self.gaussian_conditional.compress(y, indexes, means=means_hat)
@@ -541,5 +542,5 @@ class TIC_PromptModel_first2(nn.Module):
         y_hat = self.gaussian_conditional.decompress(
             strings[0], indexes, means=means_hat
         )
-        x_hat = self.g_s(y_hat).clamp_(0, 1)
+        x_hat, attns_s = self.g_s(y_hat).clamp_(0, 1)
         return {"x_hat": x_hat}
