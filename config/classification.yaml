@@ -18,7 +18,7 @@ name: "exp"
 exp_name: "NAME"
 root: "/path/to/root"
 seed: 42
-checkpoint: "/Path/to/trained weight"
+checkpoint: "/Path/to/checkpoint"  # could be pre-trained base codec (for training) or trained TransTIC (for evaluation)
 LOCATION: 'prepend'
 DEEP: True
 NUM_TOKENS: 16
@@ -34,4 +34,3 @@ RETURN_ATTENTION: False
 MODEL_DECODER: False
 MASK_DOWNSAMPLE: 2
 DECODER_BLOCK: [1,2,3,4]
-TEST: True

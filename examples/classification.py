@@ -198,12 +198,6 @@ def configure_optimizers(net, args):
         for k, p in net.named_parameters()
         if "prompt" in k
     }
-    elif args.TRANSFER_TYPE == "prompt+bias":
-        parameters = {
-        k
-        for k, p in net.named_parameters()
-        if "prompt"  in k or 'bias'  in k
-    }
 
     params_dict = dict(net.named_parameters())
 
@@ -291,6 +285,12 @@ def parse_args(argv):
         help="Path to config file",
     )
     parser.add_argument(
+        "-T",
+        "--TEST",
+        action='store_true',
+        help='Testing'
+    )
+    parser.add_argument(
         '--name', 
         default=datetime.now().strftime('%Y-%m-%d_%H_%M_%S'), 
         type=str,
@@ -342,12 +342,6 @@ def main(argv):
         for k, p in net.named_parameters():
             if "prompt" not in k:
                 p.requires_grad = False
-
-    elif args.TRANSFER_TYPE == "prompt+bias":
-        for k, p in net.named_parameters():
-            if "prompt" not in k and 'bias' not in k:
-                p.requires_grad = False
-
 
     optimizer = configure_optimizers(net, args)
     lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30,60], gamma=0.5)

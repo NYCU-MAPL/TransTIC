@@ -81,7 +81,9 @@ class Alignment(torch.nn.Module):
         pass
 
 class TIC_hp(nn.Module):
-    'Modified from TIC (Lu et al., "Transformer-based Image Compression," DCC2022.)'
+    """
+    Modified from TIC (Lu et al., "Transformer-based Image Compression," DCC2022.)
+    """
     def __init__(self, N=128, M=192, prompt_config=None, input_resolution=(256,256), in_channel=3):
         super().__init__()
 

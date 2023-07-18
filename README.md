@@ -31,8 +31,8 @@ Specify the data paths, target rate point, corresponding lambda, and checkpoint 
 `python examples/train.py -c config/base_codec.yaml`
 
 ### Classification
-- **Traning**: `python examples/classification.py -c config/classification_train.yaml`
-- **Testing**: `python examples/classification.py -c config/classification_test.yaml`
+`python examples/classification.py -c config/classification.yaml`<br>
+Add argument `-T` for evaluation
 
 ### Object Detection
 

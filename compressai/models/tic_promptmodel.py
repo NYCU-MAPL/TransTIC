@@ -109,7 +109,9 @@ class Mask_Gen_Shallow(nn.Module):
 
 
 class TIC_PromptModel_first2(nn.Module):
-    'Modified from TIC (Lu et al., "Transformer-based Image Compression," DCC2022.)'
+    """
+    Modified from TIC (Lu et al., "Transformer-based Image Compression," DCC2022.)
+    """
     def __init__(self, N=128, M=192, prompt_config=None, input_resolution=(256,256)):
         super().__init__()
 
