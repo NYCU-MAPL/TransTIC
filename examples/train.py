@@ -239,6 +239,12 @@ def parse_args(argv):
         help="Path to config file",
     )
     parser.add_argument(
+        "-T",
+        "--TEST",
+        action='store_true',
+        help='Testing'
+    )
+    parser.add_argument(
         '--name', 
         default=datetime.now().strftime('%Y-%m-%d_%H_%M_%S'), 
         type=str,
