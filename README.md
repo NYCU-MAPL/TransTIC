@@ -59,4 +59,4 @@ If you find our project useful, please cite the following paper.
 ```
 
 ## Ackownledgement
-Our work is based on the framework of [CompressAI](https://github.com/InterDigitalInc/CompressAI). The base codec is adopted from [TIC](https://github.com/lumingzzz/TIC)/[TinyLIC](https://github.com/lumingzzz/TinyLIC) and the prompting method is modified from [VPT](https://github.com/KMnP/vpt) We thank the authors for open-sourcing their code.
+Our work is based on the framework of [CompressAI](https://github.com/InterDigitalInc/CompressAI). The base codec is adopted from [TIC](https://github.com/lumingzzz/TIC)/[TinyLIC](https://github.com/lumingzzz/TinyLIC) and the prompting method is modified from [VPT](https://github.com/KMnP/vpt). We thank the authors for open-sourcing their code.
