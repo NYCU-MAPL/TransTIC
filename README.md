@@ -13,6 +13,7 @@ git clone https://github.com/NYCU-MAPL/TransTIC
 cd TransTIC
 pip install -U pip && pip install -e .
 pip install timm tqdm click
+
 ```
 Install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) for object detection and instance segementation
 
