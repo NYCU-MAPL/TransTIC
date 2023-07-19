@@ -15,24 +15,24 @@ pip install -U pip && pip install -e .
 pip install timm tqdm click
 
 ```
-Install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) for object detection and instance segementation
+Install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) for object detection and instance segementation.
 
 ## Dataset
 The following datasets are used and needed to be downloaded.
-- Flicker2W
+- Flicker2W (download [here](https://github.com/liujiaheng/CompressionData), and use [this script](https://github.com/xyq7/InvCompress/tree/main/codes/scripts) for preprocessing)
 - ImageNet1K
 - COCO 2012 Train/Val
 - Kodak
 
 ## Example Usage
-Specify the data paths, target rate point, corresponding lambda, and checkpoint in the config file accordingly
+Specify the data paths, target rate point, corresponding lambda, and checkpoint in the config file accordingly.
 
 ### Base Codec (for PSNR)
 `python examples/train.py -c config/base_codec.yaml`
 
 ### Classification
 `python examples/classification.py -c config/classification.yaml`<br>
-Add argument `-T` for evaluation
+Add argument `-T` for evaluation.
 
 ### Object Detection
 
@@ -41,8 +41,8 @@ Add argument `-T` for evaluation
 ## Pre-trained Weights
 |         Tasks         |       |       |       |       |
 |:---------------------:|-------|-------|-------|-------|
-|     Base codec (TIC)  | [1](http://mapl.nctu.edu.tw/TransTIC_Weights/base_codec_1.pth.tar) | [2](http://mapl.nctu.edu.tw/TransTIC_Weights/base_codec_2.pth.tar) | [3](http://mapl.nctu.edu.tw/TransTIC_Weights/base_codec_3.pth.tar) | [4](http://mapl.nctu.edu.tw/TransTIC_Weights/base_codec_4.pth.tar) |
-|     Classification    | [1](http://mapl.nctu.edu.tw/TransTIC_Weights/cls_1.pth.tar) | [2](http://mapl.nctu.edu.tw/TransTIC_Weights/cls_2.pth.tar) | [3](http://mapl.nctu.edu.tw/TransTIC_Weights/cls_3.pth.tar) | [4](http://mapl.nctu.edu.tw/TransTIC_Weights/cls_4.pth.tar) |
+|     Base codec (TIC)  | [1](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_1.pth.tar) | [2](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_2.pth.tar) | [3](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_3.pth.tar) | [4](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_4.pth.tar) |
+|     Classification    | [1](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_1.pth.tar) | [2](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_2.pth.tar) | [3](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_3.pth.tar) | [4](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_4.pth.tar) |
 |    Object Detection   | [1]() | [2]() | [3]() | [4]() |
 | Instance Segmentation | [1]() | [2]() | [3]() | [4]() |
 
