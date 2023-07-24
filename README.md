@@ -13,9 +13,7 @@ git clone https://github.com/NYCU-MAPL/TransTIC
 cd TransTIC
 pip install -U pip && pip install -e .
 pip install timm tqdm click
-
 ```
-Install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) for object detection and instance segementation.
 
 ## Dataset
 The following datasets are used and needed to be downloaded.
@@ -34,9 +32,7 @@ Specify the data paths, target rate point, corresponding lambda, and checkpoint 
 `python examples/classification.py -c config/classification.yaml`<br>
 Add argument `-T` for evaluation.
 
-### Object Detection
-
-### Instance Segmentation
+### Object Detection & nstance Segmentation (TBA)
 
 ## Pre-trained Weights
 |         Tasks         |       |       |       |       |
