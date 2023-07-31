@@ -20,7 +20,7 @@ Install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/insta
 The following datasets are used and needed to be downloaded.
 - Flicker2W (download [here](https://github.com/liujiaheng/CompressionData), and use [this script](https://github.com/xyq7/InvCompress/tree/main/codes/scripts) for preprocessing)
 - ImageNet1K
-- COCO 2012 Train/Val
+- COCO 2017 Train/Val
 - Kodak
 
 ## Example Usage
