@@ -1,10 +1,10 @@
-root: "/work/wengyc/TLIC_logs" # TODO
-exp_name: "exp" # TODO
+root: LOG_PATH
+exp_name: "exp"
 model: "tic_promptmodel_first2"
 dataset: "coco"
-dataset_path: '/work' # TODO
-fastrcnn_path: '/work/wengyc/ckpt/model_final_280758.pkl' # TODO
-checkpoint: "/work/wengyc/ckpt/det_1.pth.tar"  # could be pre-trained base codec (for training) or trained TransTIC (for evaluation)
+dataset_path: DATASET_PATH
+fastrcnn_path: FASTRCNN_PATH_FROM_DETECTRON2
+checkpoint: CHECKPOINT_PATH  # could be pre-trained base codec (for training) or trained TransTIC (for evaluation)
 epochs: 40
 learning_rate: 1.e-4
 num_workers: 4
