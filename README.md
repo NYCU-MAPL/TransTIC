@@ -38,6 +38,8 @@ Add argument `-T` for evaluation.
 Add argument `-T` for evaluation.
 
 ### Instance Segmentation
+`python examples/segmentation.py -c config/segmentation.yaml`<br>
+Add argument `-T` for evaluation.
 
 ## Pre-trained Weights
 |         Tasks         |       |       |       |       |
