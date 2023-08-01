@@ -45,7 +45,7 @@ Add argument `-T` for evaluation.
 |     Base codec (TIC)  | [1](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_1.pth.tar) | [2](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_2.pth.tar) | [3](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_3.pth.tar) | [4](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/base_codec_4.pth.tar) |
 |     Classification    | [1](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_1.pth.tar) | [2](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_2.pth.tar) | [3](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_3.pth.tar) | [4](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/cls_4.pth.tar) |
 |    Object Detection   | [1](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/det_1.pth.tar) | [2](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/det_2.pth.tar) | [3](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/det_3.pth.tar) | [4](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/det_4.pth.tar) |
-| Instance Segmentation | [1]() | [2]() | [3]() | [4]() |
+| Instance Segmentation | [1](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/seg_1.pth.tar) | [2](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/seg_2.pth.tar) | [3](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/seg_3.pth.tar) | [4](https://github.com/NYCU-MAPL/TransTIC/releases/download/v1.0/seg_4.pth.tar) |
 
 ## Citation
 If you find our project useful, please cite the following paper.
