@@ -37,6 +37,7 @@ import os
 import time
 import logging
 from datetime import datetime
+from comet_ml import Experiment
 
 import torch
 import torch.nn as nn
@@ -114,7 +115,16 @@ def init(args):
     base_dir = f'{args.root}/{args.exp_name}/{args.quality_level}/'
     os.makedirs(base_dir, exist_ok=True)
 
-    return base_dir
+    experiment = Experiment(
+        api_key="Comet API Key",
+        project_name="Comet Project name",
+        workspace="Comet Work Space",
+    )
+    
+    experiment.set_name(f"{args.exp_name}_{args.quality_level}")
+    experiment.log_parameters(vars(args))
+    
+    return base_dir, experiment
 
 
 def setup_logger(log_dir):
@@ -169,7 +179,7 @@ def configure_optimizers(net, args):
 
 
 def train_one_epoch(
-    model, criterion, train_dataloader, optimizer, aux_optimizer, epoch, clip_max_norm
+    model, criterion, train_dataloader, optimizer, aux_optimizer, epoch, clip_max_norm, experiment
 ):
     model.train()
     device = next(model.parameters()).device
@@ -194,9 +204,21 @@ def train_one_epoch(
 
         update_txt=f'[{i*len(d)}/{len(train_dataloader.dataset)}] | Loss: {out_criterion["loss"].item():.3f} | MSE loss: {out_criterion["mse_loss"].item():.5f} | Bpp loss: {out_criterion["bpp_loss"].item():.4f} | Aux loss: {aux_loss.item():.2f}'
         tqdm_emu.set_postfix_str(update_txt, refresh=True)
+        
+        if i<100:
+            experiment.log_image(torch.clamp(out_net['x_hat'][0],0,1).squeeze().cpu().detach().numpy(), f'train_recon_{i}.png', image_channels='first', step=epoch)
+
+        
+        experiment.log_metrics({
+            'train/total_loss':out_criterion["loss"].item(),
+            'train/mse loss'  :out_criterion["mse_loss"].item(),
+            'train/bpp loss'  :out_criterion["bpp_loss"].item(),
+            'train/aux loss'  :aux_loss.item(),
+            'train/psnr'      :out_criterion['psnr'].item()
+        })
 
 
-def test_epoch(epoch, test_dataloader, model, criterion, stage='val', tqdm_meter=None):
+def test_epoch(epoch, test_dataloader, model, criterion, stage='val', tqdm_meter=None, experiment = None):
     model.eval()
     device = next(model.parameters()).device
 
@@ -218,9 +240,21 @@ def test_epoch(epoch, test_dataloader, model, criterion, stage='val', tqdm_meter
             mse_loss.update(out_criterion["mse_loss"])
             psnr.update(out_criterion['psnr'])
 
-    txt = f"{{stage}} | Loss: {loss.avg:.3f} | MSE loss: {mse_loss.avg:.5f} | Bpp loss: {bpp_loss.avg:.4f} | Aux loss: {aux_loss.avg:.2f}\n"
-    if tqdm_meter is not None:
-        tqdm_meter.set_postfix_str(txt)
+            txt = f"{stage} | Loss: {loss.avg:.3f} | MSE loss: {mse_loss.avg:.5f} | Bpp loss: {bpp_loss.avg:.4f} | Aux loss: {aux_loss.avg:.2f}"
+            if tqdm_meter is not None:
+                tqdm_meter.set_postfix_str(txt)
+                
+            if i<100:
+                experiment.log_image(torch.clamp(out_net['x_hat'][0],0,1).squeeze().cpu().numpy(), f'{stage}_recon_{i}.png', image_channels='first', step=epoch)
+
+        
+    experiment.log_metrics({
+            f'{stage}/total_loss':loss.avg,
+            f'{stage}/mse loss'  :mse_loss.avg,
+            f'{stage}/bpp loss'  :bpp_loss.avg,
+            f'{stage}/aux loss'  :aux_loss.avg,
+            f'{stage}/psnr'      :psnr.avg
+        })
 
     return loss.avg
 
@@ -260,7 +294,9 @@ def parse_args(argv):
 
 def main(argv):
     args = parse_args(argv)
-    base_dir = init(args)
+    base_dir, experiment = init(args)
+    
+    experiment.log_code(argv[-1])
     
     if args.seed is not None:
         torch.manual_seed(args.seed)
@@ -334,12 +370,12 @@ def main(argv):
     if args.TEST:
         best_loss = float("inf")
         tqrange = tqdm.trange(last_epoch, args.epochs)
-        loss = test_epoch(-1, test_dataloader, net, criterion,'test', tqrange)
+        loss = test_epoch(-1, test_dataloader, net, criterion,'test', tqrange, experiment)
         return
 
     best_loss = float("inf")
     tqrange = tqdm.trange(last_epoch, args.epochs)
-    loss = test_epoch(0, test_dataloader, net, criterion,'val', tqrange)
+    # loss = test_epoch(0, test_dataloader, net, criterion,'val', tqrange, experiment)
     for epoch in tqrange:
         train_one_epoch(
             net,
@@ -348,9 +384,10 @@ def main(argv):
             optimizer,
             aux_optimizer,
             epoch,
-            args.clip_max_norm
+            args.clip_max_norm,
+            experiment
         )
-        loss = test_epoch(epoch, test_dataloader, net, criterion,'val', tqrange)
+        loss = test_epoch(epoch, test_dataloader, net, criterion,'val', tqrange, experiment)
         lr_scheduler.step()
 
         is_best = loss < best_loss

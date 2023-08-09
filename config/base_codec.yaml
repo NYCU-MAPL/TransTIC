@@ -17,6 +17,6 @@ save: True
 clip_max_norm: 1.0
 root: '/root/path'
 name: "NAME"
-exp_name: "NAME"
+exp_name: "comet experiment name"
 seed: 42
-checkpoint: 
+checkpoint:
