@@ -382,7 +382,7 @@ def main(argv):
         ])
 
         ## Training
-        train_dataset = MSCOCO(args.dataset_path+"/COCO/train2017/",
+        train_dataset = MSCOCO(args.dataset_path+"/train2017/",
                                det_transformer,
                                "./examples/utils/img_list.txt")
         val_dataset = Kodak(args.dataset_path+"/Kodak/", transforms.ToTensor())
@@ -400,8 +400,8 @@ def main(argv):
         
         ## Testing
         if args.TEST:
-            json_path = args.dataset_path + "/COCO/annotations/instances_val2017.json"
-            image_path = args.dataset_path + "/COCO/val2017"
+            json_path = args.dataset_path + "/annotations/instances_val2017.json"
+            image_path = args.dataset_path + "/val2017"
             register_coco_instances("compressed_coco", {}, json_path, image_path)
             evaluator = COCOEvaluator("compressed_coco", cfg, False, output_dir="./coco_log")
             evaluator.reset()

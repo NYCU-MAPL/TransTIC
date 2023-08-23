@@ -285,12 +285,6 @@ def parse_args(argv):
         help="Path to config file",
     )
     parser.add_argument(
-        "-T",
-        "--TEST",
-        action='store_true',
-        help='Testing'
-    )
-    parser.add_argument(
         '--name', 
         default=datetime.now().strftime('%Y-%m-%d_%H_%M_%S'), 
         type=str,
@@ -300,6 +294,14 @@ def parse_args(argv):
     with open(given_configs.config) as file:
         yaml_data= yaml.safe_load(file)
         parser.set_defaults(**yaml_data)
+    
+    parser.add_argument(
+        "-T",
+        "--TEST",
+        action='store_true',
+        help='Testing'
+    )
+
     args = parser.parse_args(remaining)
     return args
 
