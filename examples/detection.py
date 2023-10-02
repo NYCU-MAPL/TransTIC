@@ -372,7 +372,7 @@ def main(argv):
 
     if args.dataset=='coco':
         cfg = get_cfg() # get default cfg
-        cfg.merge_from_file("./config/faster_rcnn_R_50_FPN_3x.yaml.yaml")
+        cfg.merge_from_file("./config/faster_rcnn_R_50_FPN_3x.yaml")
         cfg.MODEL.WEIGHTS = args.fastrcnn_path
     
         det_transformer = transforms.Compose([
