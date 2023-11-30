@@ -46,6 +46,9 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import transforms
 
+from collections import OrderedDict
+import pickle
+
 from compressai.zoo import image_models
 
 import yaml
@@ -113,6 +116,13 @@ class TaskLoss(nn.Module):
         super().__init__()
         self.ce = nn.CrossEntropyLoss()
         self.task_net = build_resnet_fpn_backbone(cfg, ShapeSpec(channels=3))
+        checkpoint = OrderedDict()
+        with open(cfg.MODEL.WEIGHTS, 'rb') as f:
+            FPN_ckpt = pickle.load(f)
+            for k, v in FPN_ckpt['model'].items():
+                if 'backbone' in k:
+                    checkpoint['.'.join(k.split('.')[1:])] = torch.from_numpy(v)
+        self.task_net.load_state_dict(checkpoint, strict=True)
         self.task_net = self.task_net.to(device)
         for k, p in self.task_net.named_parameters():
             p.requires_grad = False
